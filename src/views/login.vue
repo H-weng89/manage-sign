@@ -46,7 +46,7 @@ import qs from 'qs'
 import { defineComponent, reactive,onMounted } from 'vue';
 import {useRouter} from 'vue-router'
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'https://www.jessieback.top'
+axios.defaults.baseURL = 'https://join.w2fzu.com'
 
 
 export default defineComponent({

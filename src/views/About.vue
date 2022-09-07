@@ -144,7 +144,7 @@
 import { defineComponent,onMounted, reactive,toRaw,ref } from 'vue';
 import axios from 'axios'
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'https://www.jessieback.top'
+axios.defaults.baseURL = 'https://join.w2fzu.com'
 let tokenNmae = sessionStorage.getItem('tokenName')
 let token = sessionStorage.getItem('token')
 axios.defaults.headers['satoken'] = token
@@ -159,7 +159,7 @@ import FileSaver from "file-saver";
 const columns = [
   {
   title: '序号',
-  width:'10px',
+  width:'100px',
   dataIndex: 'number',
   defaultSortOrder: 'descend',
   sorter: (a, b) => b.number - a.number,
@@ -184,28 +184,7 @@ const columns = [
   title: '姓名  ',
   dataIndex: 'name',
   width:'130px'
-  // filters: [{
-  //   text: 'Joe',
-  //   value: 'Joe',
-  // }, {
-  //   text: 'Jim',
-  //   value: 'Jim',
-  // }, {
-  //   text: 'Submenu',
-  //   value: 'Submenu',
-  //   children: [{
-  //     text: 'Green',
-  //     value: 'Green',
-  //   }, {
-  //     text: 'Black',
-  //     value: 'Black',
-  //   }],
-  // }],
-  // specify the condition of filtering result
-  // here is that finding the name started with `value`
-  // onFilter: (value, record) => record.name.indexOf(value) === 0,
-  // sorter: (a, b) => a.name.length - b.name.length,
-  // sortDirections: ['descend'],
+
 }, 
 {
   title: '方向',
@@ -261,19 +240,22 @@ const columns = [
 {
   title: '邮箱',
   dataIndex: 'mail',
- 
+  width:'250px'
 
 },
 {
   title: '手机',
   dataIndex: 'phone',
   defaultSortOrder: 'descend',
+  width:'200px'
   
 },
 {
   title: '自我介绍',
   dataIndex: 'introduction',
-  width:'300px',
+  width:'200px',
+  ellipsis: true,
+
  
 },
   ];
@@ -380,15 +362,7 @@ export default defineComponent({
 
     }
 
-    //   if (!Number.isInteger(value)) {
-    //     return Promise.reject('Please input digits');
-    //   } else {
-    //     if (value < 18) {
-    //       return Promise.reject('Age must be greater than 18');
-    //     } else {
-    //       return Promise.resolve();
-    //     }
-    //   }
+
     };
 
     let checkMail = async (_rule, value) => {
@@ -409,33 +383,7 @@ export default defineComponent({
                   return Promise.resolve();
                 }
     }
-    // let checkNull = (_rule,value)=>{
-    //   if(!value){
-    //     return Promise.reject('不能为空')
 
-    //   }
-    // }
-
-    // let validatePass2 = async (_rule, value) => {
-    //   if (value === '') {
-    //     return Promise.reject('Please input the password again');
-    //   } else if (value !== formState.pass) {
-    //     return Promise.reject("Two inputs don't match!");
-    //   } else {
-    //     return Promise.resolve();
-    //   }
-    // };
-//  no: '',  //学号
-//       name: '',
-//      jobs:[],
-//      campus:['铜盘','旗山'],
-//      grade:['大一','大二'],
-//      profession:'',
-//      access:[],
-//      reason:'',
-//      introduction:'',
-//      mail:'',
-//      phone:''
     const rules = {
       no: [{
         required: true,
@@ -450,16 +398,7 @@ export default defineComponent({
         validator: checkPhone,
         trigger: 'change',
       }],
-      // reason:[
-      //   {validator:checkNull,
-      //   trigger:'change'
-      //   }
-      // ],
-      // introduction:[
-      //   {validator:checkNull,
-      //   trigger:'change'
-      //   }
-      // ]
+     
     };
     const onChange = (pagination, filters, sorter) => {
       console.log('params', pagination, filters, sorter);
@@ -538,27 +477,7 @@ computed:{
   },
   methods:{
    async  excel(){
-      //  let table = document.getElementsByTagName('table')[0]
-      // table.id = 'table'
-      // console.log(table)
-      // const filename = "导出.xlsx";
-      // // 导出表格加id,通过id获取要导出的表单
-      // const wb = XLXS.utils.table_to_book(document.getElementById("table"));
-      // const wbout = XLXS.write(wb, {
-      //   bookType: "xlsx",
-      //   bookSST: true,
-      //   type: "array",
-      // });
-      // try {
-      //   FileSaver.saveAs(
-      //     new Blob([wbout], {
-      //       type: "application/octet-stream",
-      //     }),
-      //     filename
-      //   );
-      // } catch (e) {
-      //   console.log(e);
-      // }
+      
       const config = {
         headers: {
           'content-type': 'application/x-www-form-urlencoded'
@@ -648,16 +567,19 @@ let blob=new Blob([result.data],{type:result.data.type})
 
 .btn{
   display: flex;
-  height: 50px;
+  
 justify-content: space-around;
-  line-height: 50px;
+
  width: 100%;
   align-content: center;
   align-items: center;
-margin-left: 10%;
   flex-wrap: nowrap;
  
    font-size: 16px;
+
+   .number{
+   
+   }
 
    .search{
    margin-right: 100px;
@@ -680,15 +602,26 @@ margin-left: 10%;
 .wra{
   width: 100%;
   height: 100%;
-  overflow: hidden;
+ 
+
+  .main{
+   /deep/.ant-table table{
+    margin: auto;
+    width: 100%;
+   }
+  }
 }
   
 
+.search{
+
+}
 .add{
   
   text-decoration: underline;
   color: skyblue;
   margin-right: 100px;
+  
 
 }
 .add:hover{

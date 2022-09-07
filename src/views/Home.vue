@@ -185,8 +185,12 @@ export default defineComponent( {
 .main{
     height: 80%;
    
-width: 88%;
+width:100%;
 
+ /deep/.ant-table table{
+    margin: auto;
+    width: 80%;
+   }
 }
 
 </style>

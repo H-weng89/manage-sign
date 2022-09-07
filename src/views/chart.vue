@@ -14,7 +14,7 @@ import * as echarts from 'echarts'
 import axios from 'axios'
 import qs from 'qs'
 axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'https://www.jessieback.top'
+axios.defaults.baseURL = 'https://join.w2fzu.com'
 axios.defaults.headers['satoken'] = sessionStorage.getItem('token')
 
 import {mapState} from 'vuex'
@@ -48,6 +48,7 @@ export default {
   
    var campus  = this.result.data.data.campus
    var jobs =this.result.data.data.job
+   jobs.splice(0,1)
    var grade = this.result.data.data.grade
    var channel = this.result.data.data.channel
     var myChart = echarts.init(document.getElementById('chart1'));
@@ -114,13 +115,13 @@ title:{
   y:'bottom'
 },
   xAxis: {
-    data: [jobs[0].job,jobs[1].job, jobs[2].job, jobs[3].job, jobs[5].job,jobs[6].job,jobs[7].job,jobs[8].job,jobs[10].job]
+    data: jobs.map(item=>item.job)
   },
   yAxis: {},
   series: [
     {
       type: 'bar',
-      data: [jobs[0].num, jobs[1].num, jobs[2].num, jobs[3].num,jobs[5].num,jobs[6].num,jobs[7].num,jobs[8].num,jobs[10].num]
+      data: jobs.map(item=>item.num)
      
     }
   ]
@@ -194,22 +195,16 @@ title:{
     {
       type: 'pie',
     
-      data: [
-        {
-          value: channel[0].count,
-          name: channel[0].channel
-        },
-        {
-          value: channel[1].count,
-          name: channel[1].channel
-        },
-        {
-          value:channel[2].count,
-          name:channel[2].channel
-        }
+      data: channel.map(item=>{
+          return {
+            value: item.count,
+          name: item.channel
+          }
+        })
         
-      ],
-      radius:'60%',
+        
+      ,
+      radius:'50%',
       lable:{
         title:'校区'
       },
