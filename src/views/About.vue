@@ -169,7 +169,24 @@ const columns = [
   title: '提交时间',
   dataIndex: 'updateTime',
   defaultSortOrder: 'descend',
-  sorter: (a, b) => 1-2,
+  sorter: (a, b) =>{
+  let a1 = a.updateTime.split('T')
+    a1 =   a1[0].split('-')
+    const am = parseInt(a1[1],10)
+    const ad = parseInt(a1[2],10)
+    let b1 = b.updateTime.split('T')  
+    b1 =   b1[0].split('-')
+    const bm = parseInt(b1[1],10)
+     const bd = parseInt(b1[2],10)
+     if(am==bm){
+      return ad-bd
+     }
+     else{
+      return am-bm
+     }
+
+
+  },
   width:'170px'
 },
 {
